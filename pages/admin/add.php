@@ -88,7 +88,7 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'update_clients') {
-  $UpdateCustomers = UpdateCustomers($baseDeDonnee, $_GET['id_clients']);  ?>
+    $UpdateCustomers = UpdateCustomers($baseDeDonnee, $_GET['id_clients']);  ?>
 <section class="content">
     <div class="row">
         <div style="" class="col-md-12">
@@ -135,7 +135,7 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'update_epaces') {
-  $UpdateEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
+    $UpdateEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
 <section class="content">
     <div class="row">
         <div style="" class="col-md-12">
@@ -191,8 +191,8 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'louer_espace') {
-  $GetCustomers  = GetCustomers($baseDeDonnee);
-  $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
+    $GetCustomers  = GetCustomers($baseDeDonnee);
+    $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
 <section class="content-header">
     <h1>
         Louer un Espace
@@ -250,8 +250,8 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'vente_espace') {
-  $GetCustomers  = GetCustomers($baseDeDonnee);
-  $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
+    $GetCustomers  = GetCustomers($baseDeDonnee);
+    $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
 <section class="content-header">
     <h1>
         Vendre un Espace
@@ -374,8 +374,8 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'paiement_location') {
-  $GetMonth  = GetMonth($baseDeDonnee);
-  $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
+    $GetMonth  = GetMonth($baseDeDonnee);
+    $GetEspaces = UpdateEspaces($baseDeDonnee, $_GET['id_espaces']); ?>
 <section class="content-header">
     <h1>
         Effectuer un Paiement
@@ -457,6 +457,56 @@
         </form>
     </div>
 </section>
+<section class="content">
+
+    <?php $year = ['2019', '2020', '2021', '2022'];     ?>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <table id="dataTable" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Mois</th>
+                                <th>Montant</th>
+                                <th>Année</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($year as $key => $value) {
+
+                                    $ImpayeLocation = ImpayeLocation($baseDeDonnee, $_GET['id_espaces'], $value);
+                                    $GetPaiementsEspaces = GetPaiementsEspaces($baseDeDonnee, $_GET['id_espaces']);
+                                    $montantInitial = $GetPaiementsEspaces * 12;
+
+
+                                    foreach ($ImpayeLocation as $key => $data) { ?>
+                            <tr>
+                                <td> <input type="checkbox" <?php if ($data['DATA'] != NULL) { ?> checked=""
+                                        <?php } ?> /> </td>
+                                <td><?= $data['nom_mois']; ?></td>
+                                <td><?= $data['DATA']; ?></td>
+                                <td><?= $value; ?></td>
+
+                            </tr>
+                            <?php }
+                                } ?>
+
+
+
+
+                        </tbody>
+                        <tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php } ?>
 <?php if ($_GET['display'] == 'first') { ?>
 <section class="content">
@@ -557,7 +607,7 @@
 </section>
 <?php } ?>
 <?php if ($_GET['display'] == 'update_users') {
-  $GetUsers  = SingleUser($baseDeDonnee, $_GET['id_users']);
+    $GetUsers  = SingleUser($baseDeDonnee, $_GET['id_users']);
 ?>
 <section class="content">
     <div class="row">
